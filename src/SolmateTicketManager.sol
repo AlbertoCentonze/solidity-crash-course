@@ -1,20 +1,15 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-contract CustomPriceTicketManager {
-		address public owner;
+import "solmate/auth/Owned.sol";
+
+contract CustomPriceTicketManager is Owned {
     uint256 public price;
     mapping(address => bool) public tickets;
 
-    constructor(uint256 _price, address _owner) {
+    constructor(uint256 _price, address owner) Owned(owner) {
         price = _price;
-				owner = _owner;
     }
-
-		modifier onlyOwner() {
-			require(msg.sender == owner, "You're not the owner");
-			_;
-		}
 
 		function setPrice(uint256 _price) public onlyOwner {
 			price = _price;
