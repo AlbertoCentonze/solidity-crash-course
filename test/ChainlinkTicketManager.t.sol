@@ -8,9 +8,10 @@ contract ChainlinkTicketManagerTest is Test {
     ChainlinkTicketManager public tm;
     address alice = makeAddr("alice");
     address bob = makeAddr("bob");
+    address priceFeed = "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e"; // goerli ETH/USD price feed address
 
     function setUp() public {
-        tm = new ChainlinkTicketManager(1 ether, alice);
+        tm = new ChainlinkTicketManager(1 ether, alice, priceFeed);
     }
 
     function testChangePrice(uint256 newPrice) public {
