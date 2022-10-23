@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import "solmate/auth/Owned.sol";
 
-contract CustomPriceTicketManager is Owned {
+contract SolmateTicketManager is Owned {
     uint256 public price;
     mapping(address => bool) public tickets;
 

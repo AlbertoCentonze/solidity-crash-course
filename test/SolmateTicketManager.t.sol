@@ -2,15 +2,15 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "../src/CustomPriceTicketManager.sol";
+import "../src/SolmateTicketManager.sol";
 
-contract CustomPriceTicketManagerTest is Test {
-    CustomPriceTicketManager public tm;
+contract SolmateTicketManagerTest is Test {
+    SolmateTicketManager public tm;
 		address alice = makeAddr("alice");
 		address bob = makeAddr("bob");
 
     function setUp() public {
-       tm = new CustomPriceTicketManager(1 ether, alice);
+       tm = new SolmateTicketManager(1 ether, alice);
     }
 
 		function testChangePrice(uint256 newPrice) public {
@@ -23,7 +23,7 @@ contract CustomPriceTicketManagerTest is Test {
 
 		function testOnlyOwnerUnauthorized() public {
 			vm.prank(bob);
-			vm.expectRevert(bytes("You're not the owner"));
+			vm.expectRevert(bytes("UNAUTHORIZED"));
 			tm.setPrice(1);
 		}
 }
