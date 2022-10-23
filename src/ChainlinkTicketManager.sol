@@ -5,7 +5,7 @@ import "solmate/auth/Owned.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceConverter.sol";
 
-contract CustomPriceTicketManager is Owned {
+contract ChainlinkTicketManager is Owned {
     using PriceConverter for uint256;
     uint256 public price;
     mapping(address => bool) public tickets;
