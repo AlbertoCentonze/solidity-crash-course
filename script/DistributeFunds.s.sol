@@ -4,7 +4,6 @@ pragma solidity ^0.8.13;
 import "forge-std/Script.sol";
 
 contract DistributeFunds is Script {
-    address test = address(1);
     address myAddress = 0xa4049faab47BbD7fdbA8783C7b64CC6b9c7d5920;
     address[] participants;
 
