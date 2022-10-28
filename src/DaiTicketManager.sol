@@ -12,8 +12,8 @@ contract DaiTicketManager is Owned {
     constructor(
         uint256 _price,
         address _token,
-        address owner
-    ) Owned(owner) {
+        address _owner
+    ) Owned(_owner) {
         price = _price;
         token = _token;
     }
