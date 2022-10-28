@@ -11,9 +11,9 @@ contract SolmateTicketManager is Owned {
         price = _price;
     }
 
-		function setPrice(uint256 _price) public onlyOwner {
-			price = _price;
-		}
+    function setPrice(uint256 _price) public onlyOwner {
+        price = _price;
+    }
 
     function buyTicket() public payable {
         require(msg.value == price, "The price is incorrect");
