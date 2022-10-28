@@ -6,9 +6,9 @@ import "../src/NftTicketManager.sol";
 import "../src/NftTickets.sol";
 
 contract DeployReentrant is Script {
-    // address myAddress = 0xa4049faab47BbD7fdbA8783C7b64CC6b9c7d5920;
+    address myAddress = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
 
-    function run(address myAddress) public {
+    function run() public {
         vm.startBroadcast(myAddress);
 				NftTickets nft = new NftTickets(myAddress);
 				NftTicketManager tm = new NftTicketManager(1 ether, address(nft), myAddress);
