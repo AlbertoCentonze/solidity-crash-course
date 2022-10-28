@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "chainlink/v0.8/interfaces/AggregatorV3Interface.sol";
 
 library PriceConverter {
     function getPrice(AggregatorV3Interface priceFeed)
@@ -18,7 +18,7 @@ library PriceConverter {
         AggregatorV3Interface priceFeed
     ) internal view returns (uint256) {
         uint256 ethPrice = getPrice(priceFeed);
-        uint256 ethAmountInUsd = (ethAmount * ethPrice) / 1e18;
+        uint256 ethAmountInUsd = (ethAmount * ethPrice) / 1 ether;
         return ethAmountInUsd;
     }
 }

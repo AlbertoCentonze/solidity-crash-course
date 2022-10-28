@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "solmate/auth/Owned.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "chainlink/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceConverter.sol";
 
 contract ChainlinkTicketManager is Owned {
