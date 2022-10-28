@@ -22,11 +22,10 @@ contract TicketManagerTest is Test {
     }
 
     function testTicketIsAssigned() public {
-				address alice = makeAddr("alice");
+        address alice = makeAddr("alice");
         assertFalse(tm.hasTicket(alice));
-				hoax(alice);
-				tm.buyTicket{value: 1 ether}();
+        hoax(alice);
+        tm.buyTicket{value: 1 ether}();
         assertTrue(tm.hasTicket(alice));
     }
-
 }

@@ -3,23 +3,20 @@ pragma solidity ^0.8.13;
 
 import "solmate/auth/Owned.sol";
 import "solmate/tokens/ERC20.sol";
-
 import "./NftTickets.sol";
+import "forge-std/Test.sol";
 
 contract NftTicketManager is Owned {
     uint256 public price;
     address public token;
-		address public nft;
-    mapping(address => bool) public tickets;
+    address public nft;
 
     constructor(
         uint256 _price,
-        address _token,
-				address _nft,
-        address owner
-    ) Owned(owner) {
+        address _nft,
+        address _owner
+    ) Owned(_owner) {
         price = _price;
-        token = _token;
         nft = _nft;
     }
 
@@ -27,13 +24,12 @@ contract NftTicketManager is Owned {
         price = _price;
     }
 
-    function buyTicket() public {
-        tickets[msg.sender] = true;
-				ERC20(token).transferFrom(msg.sender, address(this), price);
-				NftTickets(nft).mint();
+    function buyTicket() public payable {
+        require(msg.value == price, "The price is incorrect");
+        NftTickets(nft).mint(msg.sender);
     }
 
-    function hasTicket(address person) public view returns (bool) {
-        return tickets[person];
+    function hasTicket(address person) public view returns (uint256) {
+        return ERC721(nft).balanceOf(person);
     }
 }
