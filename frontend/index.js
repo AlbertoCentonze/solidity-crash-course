@@ -26,26 +26,6 @@ const contractNftTicket = new ethers.Contract(nftTicketAddress, abiNftTicket, si
     }
 }
 
-contractNft.on("Transfer", (from, to, value) => {
-    let info = {
-        from: from,
-        to: to,
-        value: value,
-    }
-    console.log(info);
-    const nft = contractNftTicket.tokenURI(2).then((result) => {
-        console.log(result)
-        nftMinted.src = result;
-    });
-})
-
-async function buyTicket() {
-    if (typeof window.ethereum !== 'undefined') {
-        await contractNftTicketManager.buyTicket({ value: ethers.utils.parseEther("1") }); 
-        console.log('minted')
-    }
-}   
-
 async function getBalance() {
     if (typeof window.ethereum !== 'undefined') {
         let accounts = await provider.send("eth_requestAccounts", []);
@@ -57,4 +37,25 @@ async function getBalance() {
         })
     }
 }
+
+async function buyTicket() {
+    if (typeof window.ethereum !== 'undefined') {
+        await contractNftTicketManager.buyTicket({ value: ethers.utils.parseEther("1") }); 
+        console.log('Purchase processing')
+    }
+}
+
+contractNft.on("Transfer", (from, to) => {
+    let info = {
+        from: from,
+        to: to,
+    }
+    console.log(info);
+    const nft = contractNftTicket.tokenURI(2).then((result) => {
+        console.log(result)
+        nftMinted.src = result;
+    });
+})
+
+
 
