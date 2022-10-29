@@ -1,5 +1,5 @@
 import { ethers } from "./ethers-5.6.esm.min.js"    //module
-import { NftTicketManagerAddress, NftTicketAddress, abiNftTicketManager, abiNftTicket, abiERC721 } from "./constants.js"
+import { nftTicketManagerAddress, nftTicketAddress, abiNftTicketManager, abiNftTicket, abiERC721 } from "./constants.js"
 
 const connectButton = document.getElementById('connectButton');
 const buyTicketButton = document.getElementById('buyTicketButton');
@@ -12,8 +12,9 @@ balanceButton.onclick = getBalance;
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
-const contract2 = new ethers.Contract(NftTicketAddress, abiERC721, provider);
-const contract3 = new ethers.Contract(NftTicketAddress, abiNftTicket, signer);
+const contractNftTicketManager = new ethers.Contract(nftTicketManagerAddress, abiNftTicketManager, signer);
+const contractNft = new ethers.Contract(nftTicketAddress, abiERC721, provider);
+const contractNftTicket = new ethers.Contract(nftTicketAddress, abiNftTicket, signer);
 
  async function connect() {
     if (typeof window.ethereum !== 'undefined') {
@@ -25,14 +26,14 @@ const contract3 = new ethers.Contract(NftTicketAddress, abiNftTicket, signer);
     }
 }
 
-contract2.on("Transfer", (from, to, value) => {
+contractNft.on("Transfer", (from, to, value) => {
     let info = {
         from: from,
         to: to,
         value: value,
     }
     console.log(info);
-    const nft = contract3.tokenURI(2).then((result) => {
+    const nft = contractNftTicket.tokenURI(2).then((result) => {
         console.log(result)
         nftMinted.src = result;
     });
@@ -40,8 +41,7 @@ contract2.on("Transfer", (from, to, value) => {
 
 async function buyTicket() {
     if (typeof window.ethereum !== 'undefined') {
-        const contract = new ethers.Contract(NftTicketManagerAddress, abiNftTicketManager, signer);
-        await contract.buyTicket({ value: ethers.utils.parseEther("1") }); 
+        await contractNftTicketManager.buyTicket({ value: ethers.utils.parseEther("1") }); 
         console.log('minted')
     }
 }   
