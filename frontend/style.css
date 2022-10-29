@@ -34,7 +34,7 @@ button {
 }
 
 button:hover {
-    color: #dbdbdb;
+    color: #f3f3f3;
 }
 
 #balanceETH {
@@ -42,4 +42,9 @@ button:hover {
     margin-left: 1rem;
     font-size: 1.125rem; /* 18px */
     line-height: 1.75rem; /* 28px */
+}
+
+img {
+    max-width: 10rem;
+    max-height: 10rem;
 }
