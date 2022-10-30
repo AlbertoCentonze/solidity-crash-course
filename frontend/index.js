@@ -13,8 +13,8 @@ balanceButton.onclick = getBalance;
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 const contractNftTicketManager = new ethers.Contract(nftTicketManagerAddress, abiNftTicketManager, signer);
-const contractNft = new ethers.Contract(nftTicketAddress, abiERC721, provider);
 const contractNftTicket = new ethers.Contract(nftTicketAddress, abiNftTicket, signer);
+//const contractNft = new ethers.Contract(nftTicketAddress, abiERC721, provider);
 
  async function connect() {
     if (typeof window.ethereum !== 'undefined') {
@@ -45,7 +45,7 @@ async function buyTicket() {
     }
 }
 
-contractNft.on("Transfer", (from, to) => {
+contractNftTicket.on("Transfer", (from, to) => {
     let info = {
         from: from,
         to: to,
@@ -56,6 +56,3 @@ contractNft.on("Transfer", (from, to) => {
         nftMinted.src = result;
     });
 })
-
-
-

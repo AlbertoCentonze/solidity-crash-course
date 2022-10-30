@@ -1,5 +1,5 @@
-export const nftTicketManagerAddress = '0x71c95911e9a5d330f4d621842ec243ee1343292e'
-export const nftTicketAddress = '0x8464135c8f25da09e49bc8782676a84730c318bc'
+export const nftTicketManagerAddress = '0x05aa229aec102f78ce0e852a812a388f076aa555'
+export const nftTicketAddress = '0x1275d096b9dbf2347bd2a131fb6bdab0b4882487'
 export const abiNftTicketManager = [
   {
     inputs: [
